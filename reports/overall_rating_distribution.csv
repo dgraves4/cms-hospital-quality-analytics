@@ -1,7 +1,7 @@
-hospital_overall_rating,hospital_count
-1.0,199
-2.0,662
-3.0,987
-4.0,950
-5.0,384
-,2250
+hospital_overall_rating,hospital_count,rating_label,rating_sort
+1.0,199,1 Star,1
+2.0,662,2 Star,2
+3.0,987,3 Star,3
+4.0,950,4 Star,4
+5.0,384,5 Star,5
+,2250,Missing Rating,6

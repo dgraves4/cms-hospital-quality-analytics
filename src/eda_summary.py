@@ -67,8 +67,19 @@ def save_summary_tables(df: pd.DataFrame) -> None:
             .value_counts(dropna=False)
             .rename_axis("hospital_overall_rating")
             .reset_index(name="hospital_count")
-            .sort_values("hospital_overall_rating")
         )
+
+        rating_distribution["rating_label"] = rating_distribution[
+            "hospital_overall_rating"
+        ].apply(
+            lambda x: "Missing Rating" if pd.isna(x) else f"{int(x)} Star"
+        )
+
+        rating_distribution["rating_sort"] = rating_distribution[
+            "hospital_overall_rating"
+        ].fillna(6).astype(int)
+
+        rating_distribution = rating_distribution.sort_values("rating_sort")
 
         rating_distribution.to_csv(
             REPORTS_DIR / "overall_rating_distribution.csv",
