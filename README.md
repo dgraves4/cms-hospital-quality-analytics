@@ -121,16 +121,23 @@ outputs/figures/
 
 ![Average rating by hospital type](outputs/figures/average_rating_by_hospital_type.png)
 
-## Key Analysis Areas
+## Key Findings
 
-This project currently explores:
+* The CMS hospital dataset contains **5,432 hospitals** and **38 columns** after cleaning.
 
-* Which states have the most hospitals in the CMS dataset
-* How hospital overall ratings are distributed
-* Which fields have the most missing values
-* How average ratings vary by state
-* How average ratings vary by hospital type
-* How average ratings vary by hospital ownership
+* Hospital counts were highest in larger states. **Texas** had the most hospitals in the dataset with **468**, followed by **California** with **378** and **Florida** with **221**.
+
+* CMS overall ratings were not available for a large portion of the dataset. **2,250 hospitals**, or **41.42%**, had missing overall ratings. Because of this, rating-based comparisons should be interpreted only among hospitals with available ratings.
+
+* Among hospitals with available overall ratings, ratings were most commonly concentrated around **3 and 4 stars**. The dataset included **987 hospitals rated 3 stars** and **950 hospitals rated 4 stars**.
+
+* State-level average ratings varied among hospitals with available ratings. **Utah**, **Colorado**, and **South Dakota** had the highest average overall ratings in the generated state summary.
+
+* Average ratings also differed by hospital type. **Acute Care - Veterans Administration** hospitals had the highest average overall rating at approximately **4.16**, followed by **Critical Access Hospitals** at approximately **3.23** and **Acute Care Hospitals** at approximately **3.16**.
+
+* Ownership categories showed variation in average ratings. **Veterans Health Administration**, **Tribal**, and **Physician-owned** hospitals appeared among the highest-rated ownership groups based on available overall ratings.
+
+* The missing-values report showed that several CMS quality-measure footnote and measure-count fields had high missingness. These missing values were preserved because they may reflect measure applicability, hospital type, reporting eligibility, or differences in CMS reporting requirements rather than simple data-entry errors.
 
 ## Missing Data Handling
 
@@ -182,3 +189,4 @@ Potential future improvements include:
 ## Project Status
 
 Current status: Initial data collection, cleaning, exploratory analysis, reports, and visualizations are complete.
+
