@@ -79,10 +79,16 @@ def save_summary_tables(df: pd.DataFrame) -> None:
     if {"state", "hospital_overall_rating"}.issubset(df.columns):
         average_rating_by_state = (
             df.dropna(subset=["hospital_overall_rating"])
-            .groupby("state", as_index=False)["hospital_overall_rating"]
-            .mean()
-            .rename(columns={"hospital_overall_rating": "average_overall_rating"})
+            .groupby("state", as_index=False)
+            .agg(
+                average_overall_rating=("hospital_overall_rating", "mean"),
+                rated_hospital_count=("hospital_overall_rating", "count")
+            )
             .sort_values("average_overall_rating", ascending=False)
+        )
+
+        average_rating_by_state["average_overall_rating"] = (
+            average_rating_by_state["average_overall_rating"].round(2)
         )
 
         average_rating_by_state.to_csv(
@@ -94,10 +100,16 @@ def save_summary_tables(df: pd.DataFrame) -> None:
     if {"hospital_type", "hospital_overall_rating"}.issubset(df.columns):
         average_rating_by_type = (
             df.dropna(subset=["hospital_overall_rating"])
-            .groupby("hospital_type", as_index=False)["hospital_overall_rating"]
-            .mean()
-            .rename(columns={"hospital_overall_rating": "average_overall_rating"})
+            .groupby("hospital_type", as_index=False)
+            .agg(
+                average_overall_rating=("hospital_overall_rating", "mean"),
+                rated_hospital_count=("hospital_overall_rating", "count")
+            )
             .sort_values("average_overall_rating", ascending=False)
+        )
+
+        average_rating_by_type["average_overall_rating"] = (
+            average_rating_by_type["average_overall_rating"].round(2)
         )
 
         average_rating_by_type.to_csv(
@@ -109,17 +121,22 @@ def save_summary_tables(df: pd.DataFrame) -> None:
     if {"hospital_ownership", "hospital_overall_rating"}.issubset(df.columns):
         average_rating_by_ownership = (
             df.dropna(subset=["hospital_overall_rating"])
-            .groupby("hospital_ownership", as_index=False)["hospital_overall_rating"]
-            .mean()
-            .rename(columns={"hospital_overall_rating": "average_overall_rating"})
+            .groupby("hospital_ownership", as_index=False)
+            .agg(
+                average_overall_rating=("hospital_overall_rating", "mean"),
+                rated_hospital_count=("hospital_overall_rating", "count")
+            )
             .sort_values("average_overall_rating", ascending=False)
+        )
+
+        average_rating_by_ownership["average_overall_rating"] = (
+            average_rating_by_ownership["average_overall_rating"].round(2)
         )
 
         average_rating_by_ownership.to_csv(
             REPORTS_DIR / "average_rating_by_ownership.csv",
             index=False
         )
-
 
 def save_charts(df: pd.DataFrame) -> None:
     """Create simple EDA charts."""
